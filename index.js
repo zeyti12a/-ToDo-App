@@ -9,7 +9,7 @@ app.set('view engine' , 'handlebars')
 
 
 app.get('/' , (requisicao, resposta)=> {
-    resposta.send("ola mundo")
+    resposta.render('home')
 }) 
 
 app.listen(3000, () =>{
