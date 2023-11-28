@@ -46,6 +46,9 @@ header div div{
     
     margin-bottom: 2.5rem;
 }
+
+
+
 header div h1{
     color: #FFF;
     text-transform: uppercase;
@@ -53,6 +56,7 @@ header div h1{
 header form{
     display: flex;
     gap: 0.5rem;
+    margin-top: 2.5rem;
 }
 header form input{
     padding: 1.12rem;
@@ -139,11 +143,20 @@ main{
     margin-inline: auto;
 }
 
+
+
 .botoes .active{
     color: var(--info-button-active);
 }
 
 @media(min-width:1000px){
+
+    
+
+    header form{
+        display: flex;
+        gap: 0.5rem;
+    }    
 
     header{
         background-image: var(--bg-header-desktop);
