@@ -29,6 +29,7 @@ app.get('/' , (requisicao, resposta)=> {
             }
         })
 
+        res.render('home',{ tarefas })
 
 
     })
