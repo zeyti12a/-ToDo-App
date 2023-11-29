@@ -1,25 +1,12 @@
 const express = require("express")
-const exphbs = require ("express-handlebars")
-// arrumando o commit
-
-
-const app = express() 
+const app = express()
 const mysql = require("mysql2")
-
-app.engine('handlebars',exphbs.engine() )
-app.set('view engine' , 'handlebars')
-
-app.use(express.static('public'))
-
-
-app.get('/' , (requisicao, resposta)=> {
+app.get("/", (req,res)=>{
     const sql = 'SELECT * FROM tarefas'
-
     conexao.query(sql,(erro,dados)=>{
         if (erro) {
             return console.log(erro)
         }
-
         const tarefas = dados.map((dado)=>{
             // Convertendo cada um dos itens da lista em um objeto que tem true ou false
             return{
@@ -29,15 +16,13 @@ app.get('/' , (requisicao, resposta)=> {
             }
         })
 
-        res.render('home',{ tarefas })
 
+        res.render('home',{ tarefas })
 
     })
 }) 
 
-app.listen(3000, () =>{
-    console.log ("Servidor ROdando na porta 3000")
-}) 
+ 
 
 const conexao = mysql.createConnection({
     host: "localhost",
@@ -77,6 +62,24 @@ app.post("/criar", (req,res)=>{
 
     conexao.query(sql, (erro)=>{
         if (erro){
+            return console.log(erro)
+        }
+
+        res.redirect('/')
+    })
+}) 
+
+app.post('/completar', (req,res)=>{
+    const id = req.body.id
+
+    const sql = `
+        UPDATE tarefas
+        SET completa = '1'
+        WHERE id = ${id}
+    `
+
+    conexao.query(sql, (erro)=>{
+        if (erro) {
             return console.log(erro)
         }
 
