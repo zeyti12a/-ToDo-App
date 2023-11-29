@@ -30,12 +30,37 @@ const conexao = mysql.createConnection({
 })  
 conexao.connect((erro)=>{
     if (erro){
-        console.log(erro)
+        return console.log(erro)
     } 
 
     console.log("conectado ao mysql")
 
     app.listen(3000, ()=>{
         console.log("Servidor rodando na porta 3000")
+    })
+}) 
+
+app.use(express.urlencoded({
+    extended: true
+}))
+
+app.use(express.json())
+
+
+app.post("/criar", (req,res)=>{
+    const descricao= req.body.descricao 
+    const completa = 0
+
+    const sql = `
+        INSERT INTO tarefas(descricao, completa)
+        VALUES ('${descricao}', '${completa}')
+    `
+
+    conexao.query(sql, (erro)=>{
+        if (erro){
+            return console.log(erro)
+        }
+
+        res.redirect('/')
     })
 })
