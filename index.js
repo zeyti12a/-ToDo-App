@@ -33,6 +33,10 @@ app.get("/", (req,res)=>{
     })
 }) 
 
+app.get('/ativas', (req,res)=>{
+
+})
+
  
 
 const conexao = mysql.createConnection({
